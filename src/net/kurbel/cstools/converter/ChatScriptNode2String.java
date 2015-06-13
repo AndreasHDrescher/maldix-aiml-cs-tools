@@ -38,7 +38,7 @@ public class ChatScriptNode2String
 	
 	public static String responderNodePlain(CsMatchResponderNode responderNode) {
 		StringBuffer buffer = new StringBuffer();
-		buffer.append("[");
+		buffer.append(" [");
 		buffer.append(responderNode.getSentence());
 		buffer.append("]\n");
 		return buffer.toString();
@@ -77,11 +77,11 @@ public class ChatScriptNode2String
 			boolean enclosedInBrackets = responderNode.getParentTopic().indexOf(" ") > -1;
 			
 			if (enclosedInBrackets)
-				buffer.append("\"");
+				buffer.append(" \"");
 			buffer.append(responderNode.getParentTopic());
 			buffer.append("* ");
 			if (enclosedInBrackets)
-				buffer.append("\"");
+				buffer.append("\" ");
 		}
 	}
 	
