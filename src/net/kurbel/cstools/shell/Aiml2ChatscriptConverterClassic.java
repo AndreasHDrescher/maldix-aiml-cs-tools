@@ -111,10 +111,12 @@ public class Aiml2ChatscriptConverterClassic {
 						for(Concept concept : concepts) {
 							for (String content : concept.getContents()) {
 
+								if (content == null || "".equals(content))
+									continue;
+
 								if (stopwords.isStopword(content.toLowerCase()))
 									continue;
 
-								
 								String expanded = " " + searchableRandom + " ";
 								if (expanded.indexOf(" " + content + " ")>-1) {
 									responderNode.addConcept(concept.getName());

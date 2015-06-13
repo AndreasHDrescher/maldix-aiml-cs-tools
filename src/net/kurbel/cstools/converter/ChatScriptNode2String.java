@@ -14,7 +14,7 @@ public class ChatScriptNode2String
 		buffer.append(" [");
 		buffer.append(node.getTopic());
 		buffer.append("* ");
-		buffer.append("]");
+		buffer.append("] ");
 		
 		buffer.append("\n");
 		
