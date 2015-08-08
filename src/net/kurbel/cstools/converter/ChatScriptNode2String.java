@@ -53,7 +53,7 @@ public class ChatScriptNode2String
 			addBegin(buffer, responderNode);
 			
 			if (size > 1)
-				buffer.append(" [");
+				buffer.append(" [ ");
 			
 			for (int i=0; i<size; i++) {			
 				buffer.append(responderNode.getConceptList().get(i));
