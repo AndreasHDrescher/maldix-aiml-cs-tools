@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import net.kurbel.cstools.nodes.AimlNode;
+import net.kurbel.cstools.parser.ConceptContent;
 import net.kurbel.cstools.parser.ConceptParser;
 import net.kurbel.cstools.parser.Concept;
 import net.kurbel.cstools.parser.Stopwords;
@@ -210,14 +211,14 @@ public class Aiml2ChatscriptConverterExperimental {
 	    }
 	}
 	
-	private static void addConcept(IndexWriter w, String concept, Iterable<String> text) throws IOException
+	private static void addConcept(IndexWriter w, String concept, Iterable<ConceptContent> text) throws IOException
 	{
 		  Document doc = new org.apache.lucene.document.Document();
 		  doc.add(new TextField("concept", concept, Field.Store.YES));
 		//  doc.add(new TextField("text", join(" ", text), Field.Store.YES));
-		  for (String t : text)
+		  for (ConceptContent t : text)
 		  {
-			  doc.add(new TextField("text", t, Field.Store.YES));
+			  doc.add(new TextField("text", t.getParsedContent(), Field.Store.YES));
 		  }
 		  w.addDocument(doc);
 	}

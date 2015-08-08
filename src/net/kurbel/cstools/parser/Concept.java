@@ -9,19 +9,18 @@ public class Concept {
 	
 	private String name;
 	
-	private List<String> contents;
+	private List<ConceptContent> contents;
 	
 	private Concept parentConcept;
 	
 	public Concept() {
-		this.contents = new ArrayList<String>();
+		this.contents = new ArrayList<ConceptContent>();
 	}
 	
 	public void setName(String name)
 	{
 		this.name = name;
 	}
-	
 	public String getName() {
 		return this.name;
 	}
@@ -29,37 +28,18 @@ public class Concept {
 	public void setParentConcept(Concept parentConcept) {
 		this.parentConcept = parentConcept;
 	}
-	
 	public Concept getParentConcept() {
 		return this.parentConcept;
 	}
-	
-	public void setContents(List<String> contents) {
-		this.contents = contents;
-	}
-	
-	public List<String> getContents() {
+
+	public List<ConceptContent> getContents() {
 		return this.contents;
 	}
-	
-	public void addContent(String[] contents) {
-		for (String content : contents) {
-			addContent(content);
-		}
+
+	public void addContent(ConceptContent content) {
+		this.contents.add(content);
 	}
-	
-	public void addContent(String content) {
-		this.getContents().add(content);
-	}
-	
-	public String getFullContent() {
-		StringBuilder sb = new StringBuilder();
-		for (String content : contents) {
-			sb.append(content);
-		}
-		return sb.toString();
-	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;

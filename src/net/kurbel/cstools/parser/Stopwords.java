@@ -35,12 +35,5 @@ public class Stopwords {
 	public boolean isStopword(String word) {
 		return this.stopwords.contains(word);
 	}
-	
-	public CharArraySet getCharArraySet() {
-		Collection<String> c= this.stopwords;
-		boolean ignoreCase = true;
-		CharArraySet set = new CharArraySet(Version.LUCENE_45, c, ignoreCase);
-		return set;
-		
-	}
+
 }

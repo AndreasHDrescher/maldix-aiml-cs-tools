@@ -34,7 +34,8 @@ public class ConceptParser {
 		
 		Matcher m = conceptPattern.matcher(alltogether);
 		
-		Pattern conceptContentPattern = Pattern.compile("\\\"{0,1}([a-zA-Z0-9öäüÖÄÜßéèûôâáààóòâçéèêëîïôûùüÿñæœ'´`\\!\\?\\-\\_\\&\\%\\$\\§\\ ]+)\\\"{0,1}[\\s]*", Pattern.COMMENTS );
+		Pattern conceptContentPattern = Pattern.compile("([\\p{L}0-9\\'\\\"´`\\!\\?\\-\\_\\&\\%\\$\\§\\ ]+)[\\s]*", Pattern.COMMENTS );
+		Pattern enclosedInQuotes = Pattern.compile("\\\"(.+)\\\"");
 
 		while (m.find()) {
 			
@@ -54,8 +55,21 @@ public class ConceptParser {
 				if(conceptContentElement=="")continue;
 				
 				//System.out.println(conceptContentElement);
-				
-				concept.addContent(conceptContentElement.trim().replace("_", " "));
+				String parsedContent = conceptContentElement.trim();
+
+                boolean isPhrase = false;
+				if (parsedContent.indexOf('_') > -1) {
+                    isPhrase = true;
+                    parsedContent = parsedContent.replaceAll("_"," ");
+				}
+
+                Matcher enclosedMatcher = enclosedInQuotes.matcher(parsedContent);
+                if (enclosedMatcher.matches()) {
+                    isPhrase = true;
+                    parsedContent = enclosedMatcher.group(1);
+                }
+
+				concept.addContent(new ConceptContent(parsedContent, isPhrase));
 				
 				/*
 				if (conceptContentElement.startsWith("\"")) {

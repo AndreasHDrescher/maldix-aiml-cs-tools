@@ -13,10 +13,7 @@ import net.kurbel.cstools.converter.ChatScriptNode2String;
 import net.kurbel.cstools.nodes.AimlNode;
 import net.kurbel.cstools.nodes.CsElementNode;
 import net.kurbel.cstools.nodes.CsMatchResponderNode;
-import net.kurbel.cstools.parser.AimlParser;
-import net.kurbel.cstools.parser.Concept;
-import net.kurbel.cstools.parser.ConceptParser;
-import net.kurbel.cstools.parser.Stopwords;
+import net.kurbel.cstools.parser.*;
 
 public class Aiml2ChatscriptConverterClassic {
 
@@ -109,10 +106,12 @@ public class Aiml2ChatscriptConverterClassic {
 						searchableRandom = searchableRandom.replaceAll("[\\.\\!\\?\\-\\,\\;\\:\\=]", "");
 
 						for(Concept concept : concepts) {
-							for (String content : concept.getContents()) {
+							for (ConceptContent conceptContent : concept.getContents()) {
 
-								if (content == null || "".equals(content))
+								if (!conceptContent.isValidContent())
 									continue;
+
+								String content = conceptContent.getParsedContent();
 
 								if (stopwords.isStopword(content.toLowerCase()))
 									continue;

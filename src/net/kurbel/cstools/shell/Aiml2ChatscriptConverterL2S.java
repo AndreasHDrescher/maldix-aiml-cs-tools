@@ -9,6 +9,7 @@ import net.kurbel.cstools.nodes.CsElementNode;
 import net.kurbel.cstools.nodes.CsMatchResponderNode;
 import net.kurbel.cstools.parser.AimlParser;
 import net.kurbel.cstools.parser.Concept;
+import net.kurbel.cstools.parser.ConceptContent;
 import net.kurbel.cstools.parser.ConceptParser;
 
 public class Aiml2ChatscriptConverterL2S {
@@ -50,11 +51,12 @@ public class Aiml2ChatscriptConverterL2S {
 				CsMatchResponderNode responderNode = new CsMatchResponderNode(aliceCategoryString);
 				responderNode.setSentence(random);
 				for(Concept concept : concepts) {
-					for (String content : concept.getContents()) {
+					for (ConceptContent conceptContent : concept.getContents()) {
 
+						String content = conceptContent.getParsedContent();
 						System.out.println("Content " + content);
 						System.out.println("RANDOM  " + random);
-						
+
 						String expanded = " " + random + " ";
 						if (expanded.indexOf(" " + content + " ")>-1) {
 							responderNode.addConcept(concept.getName());
